@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<vehiculos>
+    <vehiculo>
+        <marca>Toyota</marca>
+        <placas>369TYU</placas>
+        <modelo>Yaris</modelo>
+        <id_factura>1</id_factura>
+    </vehiculo>
+    <vehiculo>
+        <marca>VolksWagen</marca>
+        <placas>358FGV</placas>
+        <modelo>Gol</modelo>
+        <id_factura>2</id_factura><!-- En la BDs será fk_factura-->
+    </vehiculo>
+    <vehiculo>
+        <marca>Mercury</marca>
+        <placas>452TGH</placas>
+        <modelo>Marinner</modelo>
+        <id_factura>3</id_factura>
+    </vehiculo>
+    <vehiculo>
+        <marca>Nissan</marca>
+        <placas>485JOP</placas>
+        <modelo>Leaf</modelo>
+        <id_factura>4</id_factura>
+    </vehiculo>
+</vehiculos>
+
