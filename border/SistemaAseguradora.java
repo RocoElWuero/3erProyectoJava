@@ -7,6 +7,7 @@ package border;
 
 //import javax.swing.JFrame;
 
+import control.DmlUpdate;
 import control.DqlConsultas;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 public class SistemaAseguradora extends javax.swing.JFrame
 {
 	DqlConsultas dqlConsultas = new DqlConsultas();
+	DmlUpdate dmlActualizaciones = new DmlUpdate();
 	ArrayList<String> consultas = new ArrayList<String>();
 	String cadena="";
 	/**
@@ -55,13 +57,13 @@ public class SistemaAseguradora extends javax.swing.JFrame
         jButton1 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        textCliente = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        textDireccion = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel6 = new javax.swing.JLabel();
@@ -93,6 +95,11 @@ public class SistemaAseguradora extends javax.swing.JFrame
         });
 
         jButton4.setText("Nombre del cliente, direccion, placas del vehiculo");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("Nombre del cliente, placas del vehiculo, costo de la poliza y prima asegurada");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -102,6 +109,11 @@ public class SistemaAseguradora extends javax.swing.JFrame
         });
 
         jButton6.setText("Fecha de inicio y vencimiento de todas las polizas");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jButton7.setText("Nombre del cliente, placas y costo del vehiculo. Que paga el mayor costo de poliza");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -131,6 +143,11 @@ public class SistemaAseguradora extends javax.swing.JFrame
         textConsultas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jButton1.setText("Direccion de un cliente");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton9.setText("Marca y/o modelo de un vehiculo");
 
@@ -199,7 +216,7 @@ public class SistemaAseguradora extends javax.swing.JFrame
                                                     .addComponent(jLabel4))
                                                 .addGap(25, 25, 25)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+                                                    .addComponent(textCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
                                                     .addComponent(jTextField2))))))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -214,7 +231,7 @@ public class SistemaAseguradora extends javax.swing.JFrame
                                         .addGap(10, 10, 10)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
-                                            .addComponent(jTextField4)
+                                            .addComponent(textDireccion)
                                             .addComponent(jTextField7))
                                         .addGap(18, 18, 18)
                                         .addComponent(jLabel7)
@@ -258,10 +275,10 @@ public class SistemaAseguradora extends javax.swing.JFrame
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton1)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(textCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel2)
                         .addComponent(jLabel3)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(textDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton9)
@@ -311,7 +328,15 @@ public class SistemaAseguradora extends javax.swing.JFrame
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
+		consultas = dqlConsultas.consultarNombreClientePlacasYCostoVehiculoQuePagaMayorCostoPoliza();
+		for(int i=0; i<consultas.size(); i++)
+		{
+			cadena += consultas.get(i);
+			cadena += "\n";
+		}
+		areaTextoConsultas.setText(cadena);
+		cadena="";
+		consultas.clear();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -327,8 +352,44 @@ public class SistemaAseguradora extends javax.swing.JFrame
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+		consultas = dqlConsultas.consultarNombreClientePlacasVehiculoCostoPolizaPrimaAsegurada();
+		for(int i=0; i<consultas.size(); i++)
+		{
+			cadena += consultas.get(i);
+			cadena += "\n";
+		}
+		areaTextoConsultas.setText(cadena);
+		cadena="";
+		consultas.clear();
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+		consultas = dqlConsultas.consultarNombreClienteDireccionPlacasVehiculo();
+		for(int i=0; i<consultas.size(); i++)
+		{
+			cadena += consultas.get(i);
+			cadena += "\n";
+		}
+		areaTextoConsultas.setText(cadena);
+		cadena="";
+		consultas.clear();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+		consultas = dqlConsultas.consultarFechaInicioVencimientoTodasPolizas();
+		for(int i=0; i<consultas.size(); i++)
+		{
+			cadena += consultas.get(i);
+			cadena += "\n";
+		}
+		areaTextoConsultas.setText(cadena);
+		cadena="";
+		consultas.clear();
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+		dmlActualizaciones.actualizarTodosClientes(textDireccion.getText(), textCliente.getText());
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -390,14 +451,14 @@ public class SistemaAseguradora extends javax.swing.JFrame
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField textCliente;
     private javax.swing.JLabel textConsultas;
+    private javax.swing.JTextField textDireccion;
     private javax.swing.JLabel textoUpdates;
     // End of variables declaration//GEN-END:variables
 }
